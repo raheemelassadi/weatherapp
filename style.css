@@ -1,6 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;700&display=swap');
 
-body {
+* {
     font-family: 'Cabin', sans-serif;
+}
+
+#user-input-container {
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#user-input-container > input {
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 0 .5rem;
+    margin-left: 1rem;
+}
+
+#forecast-main {
+    display: flex;
+    justify-content: center;
+    background-color: blue;
+    height: 70vh;
+    padding: 1rem 1.5rem;
 }
 
