@@ -22,7 +22,6 @@
 #forecast-main {
     display: flex;
     justify-content: center;
-    background-color: blue;
     height: 70vh;
     padding: 1rem 1.5rem;
 }
@@ -30,4 +29,5 @@
 #location-time {
     display: flex;
     justify-content: center;
+    opacity: 50%;
 }

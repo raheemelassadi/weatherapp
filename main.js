@@ -3,15 +3,13 @@ const userInput = document.querySelector("#input");
 const locationDisplayName = document.querySelector("#header");
 const locationDisplayTime = document.querySelector("#location-time");
 let cityName = userInput.value;
-import timeConverter from "./utils/timeConverter.js";
 
 userInput.addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
         event.preventDefault()
         cityName = event.target.value
-        locationDisplayName.innerHTML = cityName
-        weatherCall()
         timeCall()
+        weatherCall()
     }
 })
 
@@ -19,7 +17,7 @@ const weatherCall = () => {
     fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${API_KEY}`)
         .then(response => response.json())
         .then(data => {
-            locationDisplayTime.innerHTML = timeConverter(data.list[0].dt)
+            locationDisplayName.src = `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}.png`
         })
         .catch(error => {
             console.log('Error:', error);
@@ -36,7 +34,8 @@ const timeCall = () => {
     })
         .then(response => response.json())
         .then(result => {
-            console.log(result.hour);
+            const dayOfWeek = result.day_of_week.slice(0, 3);
+            locationDisplayTime.innerHTML = `${result.hour}:${result.minute}:${result.second}, ${dayOfWeek}, ${result.month} ${result.day}, ${result.year}`
         })
         .catch(error => {
             console.error('Error: ', error);
