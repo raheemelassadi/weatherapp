@@ -27,3 +27,7 @@
     padding: 1rem 1.5rem;
 }
 
+#location-time {
+    display: flex;
+    justify-content: center;
+}
