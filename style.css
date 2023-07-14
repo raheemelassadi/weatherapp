@@ -21,13 +21,46 @@
 
 #forecast-main {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    height: 70vh;
     padding: 1rem 1.5rem;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+#temp, #main-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#main-info {
+    gap: 2rem;
+    text-align: center;
+}
+
+#forecast-main h2 {
+    font-size: 2.6rem;
 }
 
 #location-time {
     display: flex;
     justify-content: center;
-    opacity: 50%;
+    opacity: 30%;
+    margin-top: 4.2rem;
+    font-weight: 100;
 }
+
+#forecast-main img {
+    width: 100px;
+}
+
+#description {
+    margin-bottom: 4rem;
+    margin-top: -1rem;
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 1.4px;
+}
+
