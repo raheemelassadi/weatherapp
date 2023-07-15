@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weatherly</title>
     <link rel="stylesheet" href="style.css">
     <script src="main.js" type="module" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <div id="container">
         <div id="user-input-container">
-            <p>Your City</p> <input id="input"/>
+            <p>Your City</p> <input id="input" />
         </div>
         <div id="content">
             <h3 id="location-time">current time</h3>
             <div id="forecast-main">
                 <div id="temp">
-                <img id="header" src="" alt="weather icon">
-                <h2>72&deg;F</h2>
+                    <img id="header" src="" alt="weather icon">
+                    <h2>72&deg;F</h2>
                 </div>
                 <h3 id="description">Clear</h3>
                 <div id="main-info">
@@ -27,12 +30,17 @@
                     </div>
                     <div>
                         <p class="secondary-header">Wind Speed</p>
-                        <p>19.2 km/j</div>
+                        <p>19.2 km/j
                     </div>
                 </div>
             </div>
-            <div id="forecast-extra"></div>
+        </div>
+        <div id="forecast-extra">
+            <span class="secondary-header">Temperature</span>
+            <canvas id="rainChart"></canvas>
         </div>
     </div>
+    </div>
 </body>
+
 </html>
