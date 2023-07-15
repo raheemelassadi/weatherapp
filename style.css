@@ -28,6 +28,10 @@
     margin-top: 3rem;
 }
 
+.secondary-header {
+    opacity: 30%;
+}
+
 #temp, #main-info {
     display: flex;
     flex-direction: row;
