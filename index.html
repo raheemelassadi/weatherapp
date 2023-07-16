@@ -16,21 +16,21 @@
             <p>Your City</p> <input id="input" />
         </div>
         <div id="content">
-            <h3 id="location-time">current time</h3>
+            <h3 id="location-time">12:53:58, Sat, 07 15, 2023</h3>
             <div id="forecast-main">
                 <div id="temp">
-                    <img id="header" src="" alt="weather icon">
-                    <h2>72&deg;F</h2>
+                    <img id="header" src="https://openweathermap.org/img/wn/10d@4x.png" alt="weather icon">
+                    <h2 id="current-weather">72&deg;F</h2>
                 </div>
                 <h3 id="description">Clear</h3>
                 <div id="main-info">
                     <div>
-                        <p class="secondary-header">humidity</p>
-                        <p>45%</p>
+                        <p class="secondary-header">Humidity</p>
+                        <p id="humidity">45%</p>
                     </div>
                     <div>
                         <p class="secondary-header">Wind Speed</p>
-                        <p>19.2 km/j
+                        <p id="wind-speed-one">19.2 km/h</p>
                     </div>
                 </div>
             </div>
@@ -38,6 +38,36 @@
         <div id="forecast-extra">
             <span class="secondary-header">Temperature</span>
             <canvas id="rainChart"></canvas>
+            
+        </div>
+        <div id="weather-card-container">
+            <div class="weather-card">
+                <h4>Today</h4>
+                <img class="card-icon" src="https://openweathermap.org/img/wn/10d@4x.png" alt="weather icon">
+                <p>Humidity</p>
+                <p class="card-percent">30%</p>
+                <hr />
+            </div>
+            <div class="weather-card">
+                <h4>Today</h4>
+                <img class="card-icon" src="https://openweathermap.org/img/wn/10d@4x.png" alt="weather icon">
+                <p>Humidity</p>
+                <p class="card-percent">30%</p>
+                <hr />
+            </div>
+            <div class="weather-card">
+                <h4>Today</h4>
+                <img class="card-icon" src="https://openweathermap.org/img/wn/10d@4x.png" alt="weather icon">
+                <p>Humidity</p>
+                <p class="card-percent">30%</p>
+                <hr />
+            </div>
+            <div class="weather-card">
+                <h4>Today</h4>
+                <img class="card-icon" src="https://openweathermap.org/img/wn/10d@4x.png" alt="weather icon">
+                <p>Humidity</p>
+                <p class="card-percent">30%</p>
+            </div>
         </div>
     </div>
     </div>

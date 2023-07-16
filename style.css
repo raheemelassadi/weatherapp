@@ -69,6 +69,7 @@
 }
 
 #forecast-extra {
+    margin-top: 2rem;
     height: 15vh;
     display: flex;
     justify-content: center;
@@ -80,7 +81,44 @@
 }
 
 canvas {
-    margin-top: 2rem;
+    margin-top: 2.3rem;
     display: flex;
     justify-content: center;
+}
+
+#weather-card-container {
+    margin-top: 10rem;
+    gap: 10rem;
+}
+
+#weather-card-container, .weather-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.weather-card {
+
+}
+
+.weather-card > h4 {
+    font-size: 1.2rem;
+}
+
+.weather-card > img {
+    width: 6rem;
+}
+
+.card-percent {
+    margin-top: -.13rem;
+}
+
+.card-icon{
+    margin-top: -.3rem
+}
+
+hr {
+    margin-top: 7rem;
+    width: 100px;
 }
