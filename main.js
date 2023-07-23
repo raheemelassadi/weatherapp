@@ -19,12 +19,12 @@ let imgTwo = document.querySelector("#img-two")
 let imgThree = document.querySelector("#img-three")
 let imgFour = document.querySelector("#img-four")
 let cityName = userInput.value;
-let dayOne = {};
-let dayTwo = {};
-let dayThree = {};
-let dayFour = {};
+let dayOne = { temp: 70};
+let dayTwo = { temp: 72};
+let dayThree = { temp: 69};
+let dayFour = { temp: 67};
 
-
+let myChart = null; // Keep track of the chart object
 
 function capitalizeText(str) {
   return str
@@ -43,14 +43,16 @@ userInput.addEventListener("keypress", function (event) {
   }
 });
 
+
+
 // api call to open weather api
 const weatherCall = () => {
   fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${API_KEY}`)
     .then(response => response.json())
     .then(data => {
       locationDisplayName.src = `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@4x.png`;
-      let descriptionReturn = data.list[0].weather[0].description
-      description.innerHTML = capitalizeText(descriptionReturn)
+      let descriptionReturn = data.list[0].weather[0].description;
+      description.innerHTML = capitalizeText(descriptionReturn);
 
       //day one temp
       dayOne.temp = ((data.list[0].main.temp - 273.15) * 9 / 5 + 32).toFixed(0);
@@ -58,33 +60,26 @@ const weatherCall = () => {
       //day one humidty
       dayOne.humidity = data.list[0].main.humidity;
       humidity.innerHTML = dayOne.humidity + '%';
-      dayOneHumidity.innerHTML = dayOne.humidity + '%'
-      imgOne.src = `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@4x.png`
+      dayOneHumidity.innerHTML = dayOne.humidity + '%';
+      imgOne.src = `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@4x.png`;
       //day one wind speed
       dayOne.windSpeed = data.list[0].wind.speed;
       locationWind.innerHTML = dayOne.windSpeed + 'm/s';
 
-
-      dayTwo.temp = ((data.list[1].main.temp - 273.15) * 9 / 5 + 32).toFixed(0)
+      dayTwo.temp = ((data.list[1].main.temp - 273.15) * 9 / 5 + 32).toFixed(0);
       dayTwo.humidity = data.list[1].main.humidity;
-      dayTwoHumidity.innerHTML = dayTwo.humidity + '%'
-      imgTwo.src = `https://openweathermap.org/img/wn/${data.list[1].weather[0].icon}@4x.png`
+      dayTwoHumidity.innerHTML = dayTwo.humidity + '%';
+      imgTwo.src = `https://openweathermap.org/img/wn/${data.list[1].weather[0].icon}@4x.png`;
 
-      
-
-
-      dayThree.temp = ((data.list[2].main.temp - 273.15) * 9 / 5 + 32).toFixed(0)
+      dayThree.temp = ((data.list[2].main.temp - 273.15) * 9 / 5 + 32).toFixed(0);
       dayThree.humidity = data.list[2].main.humidity;
-      dayThreeHumidity.innerHTML = dayThree.humidity + '%'
-      imgThree.src = `https://openweathermap.org/img/wn/${data.list[2].weather[0].icon}@4x.png`
+      dayThreeHumidity.innerHTML = dayThree.humidity + '%';
+      imgThree.src = `https://openweathermap.org/img/wn/${data.list[2].weather[0].icon}@4x.png`;
 
-
-      dayFour.temp = ((data.list[3].main.temp - 273.15) * 9 / 5 + 32).toFixed(0)
+      dayFour.temp = ((data.list[3].main.temp - 273.15) * 9 / 5 + 32).toFixed(0);
       dayFour.humidity = data.list[3].main.humidity;
-      dayFourHumidity.innerHTML = dayFour.humidity + '%'
-      imgFour.src = `https://openweathermap.org/img/wn/${data.list[3].weather[0].icon}@4x.png`
-
-
+      dayFourHumidity.innerHTML = dayFour.humidity + '%';
+      imgFour.src = `https://openweathermap.org/img/wn/${data.list[3].weather[0].icon}@4x.png`;
 
       createChart();
     })
@@ -110,86 +105,109 @@ const timeCall = () => {
         const nextDay = currentDate.getDate();
         const nextMonth = currentDate.getMonth() + 1;
         const nextYear = currentDate.getFullYear();
-  
+
         dayTwo.date = `${nextMonth}- ${nextDay}`;
         dayTwoDate.innerHTML = dayTwo.date;
         locationDisplayTime.innerHTML = `${result.hour}:${result.minute}:${result.second}, ${dayOfWeek}, ${result.month} ${result.day}, ${result.year}`;
+
+        currentDate.setDate(currentDate.getDate() + 1); // Add one more day for dayThree
+        const dayThreeNextDay = currentDate.getDate();
+        const dayThreeNextMonth = currentDate.getMonth() + 1;
+  
+        currentDate.setDate(currentDate.getDate() + 1); // Add one more day for dayFour
+        const dayFourNextDay = currentDate.getDate();
+        const dayFourNextMonth = currentDate.getMonth() + 1;
+  
+        locationDisplayTime.innerHTML = `${result.hour}:${result.minute}:${result.second}, ${dayOfWeek}, ${result.month} ${result.day}, ${result.year}`;
+        
+        dayThree.date = `${dayThreeNextMonth}- ${dayThreeNextDay}`;
+        dayThreeDate.innerHTML = dayThree.date;
+  
+        dayFour.date = `${dayFourNextMonth}- ${dayFourNextDay}`;
+        dayFourDate.innerHTML = dayFour.date;
+        
+        createChart();
       })
       .catch(error => {
         console.error('Error: ', error);
       });
-  };
-
+};
 
 const createChart = () => {
-    const chanceOfRainData = [
-      { day: 'Today', chance: parseInt(dayOne.temp) },
-      { day: 'Tomorrow', chance: parseInt(dayTwo.temp) },
-      { day: 'Day 3', chance: parseInt(dayThree.temp) },
-      { day: 'Day 4', chance: parseInt(dayFour.temp) }
-    ];
-  
-    const temperatureValues = chanceOfRainData.map(data => data.chance);
-    const minValue = Math.min(...temperatureValues);
-  
-    const ctx = document.getElementById('rainChart').getContext('2d');
-  
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: chanceOfRainData.map(data => data.day),
-        datasets: [
-          {
-            label: 'Temperature',
-            data: temperatureValues,
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 2,
-            fill: true,
-            tension: 0.4,
-            pointRadius: 5, // Set point radius to 5 for all data points
-            pointBackgroundColor: 'rgba(75, 192, 192, 1)', // Set point fill color
-            pointBorderWidth: 0, // Remove point border
-            pointHoverRadius: 5, // Set point hover radius
-            pointHoverBackgroundColor: 'rgba(75, 192, 192, 1)', // Set point hover fill color
-            pointHoverBorderColor: 'rgba(75, 192, 192, 1)', // Set point hover border color
-            pointHoverBorderWidth: 2 // Set point hover border width
-          }
-        ]
+  // Destroy previous chart if it exists
+  if (myChart) {
+    myChart.destroy();
+  }
+
+  const chanceOfRainData = [
+    { day: 'Today', chance: parseInt(dayOne.temp) },
+    { day: 'Tomorrow', chance: parseInt(dayTwo.temp) },
+    { day: 'Day 3', chance: parseInt(dayThree.temp) },
+    { day: 'Day 4', chance: parseInt(dayFour.temp) }
+  ];
+
+  const temperatureValues = chanceOfRainData.map(data => data.chance);
+  const minValue = Math.min(...temperatureValues);
+
+  const ctx = document.getElementById('rainChart').getContext('2d');
+
+  myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: chanceOfRainData.map(data => data.day),
+      datasets: [
+        {
+          label: 'Temperature',
+          data: temperatureValues,
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 2,
+          fill: true,
+          tension: 0.4,
+          pointRadius: 5, // Set point radius to 5 for all data points
+          pointBackgroundColor: 'rgba(75, 192, 192, 1)', // Set point fill color
+          pointBorderWidth: 0, // Remove point border
+          pointHoverRadius: 5, // Set point hover radius
+          pointHoverBackgroundColor: 'rgba(75, 192, 192, 1)', // Set point hover fill color
+          pointHoverBorderColor: 'rgba(75, 192, 192, 1)', // Set point hover border color
+          pointHoverBorderWidth: 2 // Set point hover border width
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          display: false
+        },
+        y: {
+          display: false,
+          min: minValue - 5
+        }
       },
-      options: {
-        responsive: true,
-        scales: {
-          x: {
-            display: false
-          },
-          y: {
-            display: false,
-            min: minValue - 5
-          }
-        },
-        plugins: {
-          legend: {
-            display: false
-          }
-        },
-        tooltips: {
-          callbacks: {
-            label: function (context) {
-              const data = context.dataset.data[context.dataIndex];
-              return data + '°F'; // Display the temperature value as the tooltip label
-            }
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      tooltips: {
+        callbacks: {
+          label: function (context) {
+            const data = context.dataset.data[context.dataIndex];
+            return data + '°F'; // Display the temperature value as the tooltip label
           }
         }
       }
-    });
-  };
-  
-  
-  
-  
-  
+    }
+  });
+};
+
+
+
+
+
 // Call the functions to start fetching data and create the chart
+createChart()
 if (cityName) {
-    timeCall();
-    weatherCall();
-  }
+  timeCall();
+  weatherCall();
+}
