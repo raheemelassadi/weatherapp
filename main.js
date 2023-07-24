@@ -47,7 +47,7 @@ userInput.addEventListener("keypress", function (event) {
 
 // api call to open weather api
 const weatherCall = () => {
-  fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${API_KEY}`)
+  fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${API_KEY}`)
     .then(response => response.json())
     .then(data => {
       locationDisplayName.src = `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@4x.png`;
