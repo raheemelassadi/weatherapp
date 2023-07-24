@@ -156,10 +156,6 @@ hr {
         flex: 1; /* Take up the available space within #container */
     }
 
-    #forecast-main {
-
-    }
-
     #day-one {
         background-color: rgba(75, 192, 192, 1);
         color: white;
