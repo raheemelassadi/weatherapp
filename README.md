@@ -71,7 +71,7 @@ The Weather App is open-source software licensed under the [MIT License](LICENSE
 
 ## Contact
 
-For any inquiries or feedback, you can contact me via email: [raheem.elassadi@example.com](mailto:raheem.elassadi@example.com).
+For any inquiries or feedback, you can contact me via email: [raheemelassadi@gmail.com](mailto:raheemelassadi@gmail.com).
 
 ---
 
