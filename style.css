@@ -4,6 +4,13 @@
     font-family: 'Cabin', sans-serif;
 }
 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
 #user-input-container {
     font-size: 1.3rem;
     display: flex;
@@ -26,6 +33,7 @@
     padding: 1rem 1.5rem;
     align-items: center;
     margin-top: 3rem;
+    position: relative;
 }
 
 .secondary-header {
@@ -98,9 +106,6 @@ canvas {
     flex-direction: column;
 }
 
-.weather-card {
-
-}
 
 .weather-card > h4 {
     font-size: 1.2rem;
@@ -121,4 +126,60 @@ canvas {
 hr {
     margin-top: 7rem;
     width: 100px;
+}
+
+
+
+/* Your existing CSS code */
+
+@media only screen and (min-width: 1024px) {
+
+    body {
+        display: flex;
+        align-items: center;
+    }
+
+    #container {
+        display: flex;
+        justify-content: center; /* Horizontally centers both containers */
+        align-items: center; /* Vertically centers both containers */
+        max-width: 1024px; /* Set a maximum width for the container */
+        margin: 0 auto; /* Center the container horizontally */
+        gap: 5rem;
+
+    }
+
+    #left-container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        flex: 1; /* Take up the available space within #container */
+    }
+
+    #forecast-main {
+
+    }
+
+    #day-one {
+        background-color: rgba(75, 192, 192, 1);
+        color: white;
+        border-radius: 20px;
+        padding: 1rem;
+    }
+
+    #weather-card-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center; /* Horizontally centers weather cards */
+        flex: 1; /* Take up the available space within #container */
+        position: relative;
+        top: -35px;
+        gap: 2rem;
+    }
+
+    /* Any other existing styles for larger screens can remain here */
+
+    hr {
+        display: none;
+    } 
 }
